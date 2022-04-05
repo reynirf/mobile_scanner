@@ -1,13 +1,12 @@
 import 'dart:async';
+import 'dart:html' as html;
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:mobile_scanner/src/web/jsqr.dart';
-import 'dart:html' as html;
-import 'dart:ui' as ui;
-
 import 'package:mobile_scanner/src/web/media.dart';
 
 /// This plugin is the web implementation of mobile_scanner.

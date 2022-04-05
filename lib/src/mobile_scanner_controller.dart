@@ -18,6 +18,7 @@ enum CameraFacing {
 }
 
 enum MobileScannerState { undetermined, authorized, denied }
+enum MobileScannerError { noAccess }
 
 /// The state of torch.
 enum TorchState {
@@ -54,13 +55,16 @@ class MobileScannerController {
   bool hasTorch = false;
   late StreamController<Barcode> barcodesController;
 
+  Function(MobileScannerError)? noAccessToCameraHandler;
+
   Stream<Barcode> get barcodes => barcodesController.stream;
 
   MobileScannerController(
       {this.facing = CameraFacing.back,
       this.ratio,
       this.torchEnabled,
-      this.formats}) {
+      this.formats,
+      this.noAccessToCameraHandler}) {
     // In case a new instance is created before calling dispose()
     if (_controllerHashcode != null) {
       stop();
@@ -140,7 +144,8 @@ class MobileScannerController {
           break;
         case MobileScannerState.denied:
           isStarting = false;
-          throw PlatformException(code: 'NO ACCESS');
+          noAccessToCameraHandler?.call(MobileScannerError.noAccess);
+          break;
         case MobileScannerState.authorized:
           break;
       }
