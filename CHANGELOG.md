@@ -1,3 +1,37 @@
+## 2.0.0
+Breaking changes:
+This version is only compatible with flutter 3.0.0 and later.
+
+## 1.1.2-play-services
+This version uses the MLKit play-services model on Android in order to save space.
+With the example app, this version reduces the release version from 14.9MB to 7MB.
+More information: https://developers.google.com/ml-kit/vision/barcode-scanning/android
+
+## 1.1.2
+This version is the last version that will run on Flutter 2.x
+
+Bugfixes:
+* Changed onDetect to be mandatory.
+
+## 1.1.1-play-services
+This version uses the MLKit play-services model on Android in order to save space.
+With the example app, this version reduces the release version from 14.9MB to 7MB.
+More information: https://developers.google.com/ml-kit/vision/barcode-scanning/android
+
+## 1.1.1
+Bugfixes:
+* Add null checks for Android.
+* Update camera dependency for Android.
+* Fix return type for analyzeImage.
+* Add fixes for Flutter 3.
+
+## 1.1.0
+Bugfixes:
+* Fix for 'stream already listened to' exception.
+* Fix building on Android with latest Flutter version.
+* Add several WEB improvements.
+* Upgraded several dependencies.
+
 ## 1.0.0
 BREAKING CHANGES:
 This version adds a new allowDuplicates option which now defaults to FALSE. this means that it will only call onDetect once after a scan.
