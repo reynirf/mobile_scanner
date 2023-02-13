@@ -1,3 +1,103 @@
+## 3.0.0
+This big release contains all improvements from the beta releases.
+In addition to that, this release contains:
+
+Improvements:
+* Fixed an issue in which the scanner would freeze if two scanner widgets where placed in a page view,
+and the paged was swiped. An example has been added in the example app.
+You need to set startDelay: true if used in a page view.
+* [Web] Automatically inject js libraries.
+* [macOS] The minimum build version is now macOS 10.14 in according to the latest Flutter version.
+* [Android] Fixed an issue in which the scanWindow would remain even after disposing the scanner.
+* Updated dependencies.
+
+## 3.0.0-beta.4
+Fixes:
+* Fixes a permission bug on Android where denying the permission would cause an infinite loop of permission requests.
+* Updates the example app to handle permission errors with the new builder parameter.
+  Now it no longer throws uncaught exceptions when the permission is denied.
+* Updated several dependencies
+
+Features:
+* Added a new `errorBuilder` to the `MobileScanner` widget that can be used to customize the error state of the preview. (Thanks @navaronbracke !) 
+
+## 3.0.0-beta.3
+Deprecated:
+* The `onStart` method has been renamed to `onScannerStarted`.
+* The `onPermissionSet` argument of the `MobileScannerController` is now deprecated.
+
+Breaking changes:
+* `MobileScannerException` now uses an `errorCode` instead of a `message`.
+* `MobileScannerException` now contains additional details from the original error.
+* Refactored `MobileScannerController.start()` to throw `MobileScannerException`s
+  with consistent error codes, rather than string messages.
+  To handle permission errors, consider catching the result of `MobileScannerController.start()`.
+* The `autoResume` attribute has been removed from the `MobileScanner` widget.
+  The controller already automatically resumes, so it had no effect.
+* Removed `MobileScannerCallback` and `MobileScannerArgumentsCallback` typedef.
+* [Web] Replaced `jsqr` library with `zxing-js` for full barcode support.
+
+Improvements:
+* Toggling the device torch now does nothing if the device has no torch, rather than throwing an error.
+* Removed `called stop while already stopped` messages.
+
+Features:
+* You can now provide a `scanWindow` to the `MobileScanner()` widget.
+* You can now draw an overlay over the scanned barcode. See the barcode scanner window in the example app for more information.
+* Added a new `placeholderBuilder` function to the `MobileScanner` widget to customize the preview placeholder.
+* Added `autoStart` parameter to MobileScannerController(). If set to false, controller won't start automatically.
+* Added `hasTorch` function on MobileScannerController(). After starting the controller, you can check if the device has a torch.
+* [iOS] Support `torchEnabled` parameter from MobileScannerController() on iOS
+* [Web] Added ability to use custom barcode scanning js libraries 
+  by extending `WebBarcodeReaderBase` class and changing `barCodeReader` property in `MobileScannerWebPlugin`
+
+Fixes:
+* Fixes the missing gradle setup for the Android project, which prevented gradle sync from working.
+* Fixes `MobileScannerController.stop()` throwing when already stopped.
+* Fixes `MobileScannerController.toggleTorch()` throwing if the device has no torch.
+  Now it does nothing if the torch is not available.
+* Fixes a memory leak where the `MobileScanner` would keep listening to the barcode events.
+* Fixes the `MobileScanner` preview depending on all attributes of `MediaQueryData`.
+  Now it only depends on its layout constraints.
+* Fixed a potential crash when the scanner is restarted due to the app being resumed.
+* [iOS] Fix crash when changing torch state
+  
+## 3.0.0-beta.2
+Breaking changes:
+* The arguments parameter of onDetect is removed. The data is now returned by the onStart callback
+in the MobileScanner widget.
+* onDetect now returns the object BarcodeCapture, which contains a List of barcodes and, if enabled, an image.
+* allowDuplicates is removed and replaced by MobileScannerSpeed enum.
+* onPermissionSet in MobileScanner widget is deprecated and will be removed. Use the onPermissionSet
+onPermissionSet callback in MobileScannerController instead.
+* [iOS] The minimum deployment target is now 11.0 or higher.
+
+Features:
+* The returnImage is working for both iOS and Android. You can enable it in the MobileScannerController.
+The image will be returned in the BarcodeCapture object provided by onDetect.
+* You can now control the DetectionSpeed, as well as the timeout of the DetectionSpeed. For more
+info see the DetectionSpeed documentation. This replaces the allowDuplicates function.
+
+Other improvements:
+* Both the [iOS] and [Android] codebases have been refactored completely.
+* [iOS] Updated POD dependencies
+
+## 3.0.0-beta.1
+Breaking changes:
+* [Android] SDK updated to SDK 33.
+
+Features:
+* [Web] Add binaryData for raw value.
+* [iOS] Captures the last scanned barcode with Barcode.image.
+* [iOS] Add support for multiple formats on iOS with BarcodeScannerOptions.
+* Add displayValue which returns barcode value in a user-friendly format.
+* Add autoResume option to MobileScannerController which automatically resumes the camera when the application is resumed
+
+Other changes:
+* [Android] Revert camera2 dependency to stable release
+* [iOS] Update barcode scanning library to latest version
+* Several minor code improvements
+
 ## 2.0.0
 Breaking changes:
 This version is only compatible with flutter 3.0.0 and later.
