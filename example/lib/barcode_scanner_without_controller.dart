@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:mobile_scanner_example/scanner_error_widget.dart';
 
 class BarcodeScannerWithoutController extends StatefulWidget {
   const BarcodeScannerWithoutController({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class BarcodeScannerWithoutController extends StatefulWidget {
 class _BarcodeScannerWithoutControllerState
     extends State<BarcodeScannerWithoutController>
     with SingleTickerProviderStateMixin {
-  String? barcode;
+  BarcodeCapture? capture;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +25,12 @@ class _BarcodeScannerWithoutControllerState
             children: [
               MobileScanner(
                 fit: BoxFit.contain,
-                // allowDuplicates: false,
-                onDetect: (barcode, args) {
+                errorBuilder: (context, error, child) {
+                  return ScannerErrorWidget(error: error);
+                },
+                onDetect: (capture) {
                   setState(() {
-                    this.barcode = barcode.rawValue;
+                    this.capture = capture;
                   });
                 },
               ),
@@ -46,11 +49,12 @@ class _BarcodeScannerWithoutControllerState
                           height: 50,
                           child: FittedBox(
                             child: Text(
-                              barcode ?? 'Scan something!',
+                              capture?.barcodes.first.rawValue ??
+                                  'Scan something!',
                               overflow: TextOverflow.fade,
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline4!
+                                  .headlineMedium!
                                   .copyWith(color: Colors.white),
                             ),
                           ),
