@@ -91,7 +91,7 @@ class _MobileScannerState extends State<MobileScanner>
 
   /// Whether the controller should resume
   /// when the application comes back to the foreground.
-  bool _resumeFromBackground = false;
+  bool _resumeFromBackground = true;
 
   MobileScannerException? _startException;
 

@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:mobile_scanner/src/barcode_utility.dart';
+import 'package:mobile_scanner/src/enums/mobile_scanner_error_code.dart';
 
 /// The [MobileScannerController] holds all the logic of this plugin,
 /// where as the [MobileScanner] class is the frontend of this plugin.
@@ -20,6 +21,7 @@ class MobileScannerController {
     @Deprecated('Instead, use the result of calling `start()` to determine if permissions were granted.')
         this.onPermissionSet,
     this.autoStart = true,
+    this.noAccessToCameraHandler
   });
 
   /// Select which camera should be used.
@@ -54,6 +56,8 @@ class MobileScannerController {
 
   /// Automatically start the mobileScanner on initialization.
   final bool autoStart;
+
+  Function(MobileScannerErrorCode)? noAccessToCameraHandler;
 
   /// Sets the barcode stream
   final StreamController<BarcodeCapture> _barcodesController =
@@ -176,17 +180,15 @@ class MobileScannerController {
 
           if (!result) {
             isStarting = false;
-            throw const MobileScannerException(
-              errorCode: MobileScannerErrorCode.permissionDenied,
-            );
+            noAccessToCameraHandler?.call(MobileScannerErrorCode.permissionDenied);
+            break;
           }
 
           break;
         case MobileScannerState.denied:
           isStarting = false;
-          throw const MobileScannerException(
-            errorCode: MobileScannerErrorCode.permissionDenied,
-          );
+          noAccessToCameraHandler?.call(MobileScannerErrorCode.permissionDenied);
+          break;
         case MobileScannerState.authorized:
           break;
       }
