@@ -11,6 +11,36 @@ You need to set startDelay: true if used in a page view.
 * [Android] Fixed an issue in which the scanWindow would remain even after disposing the scanner.
 * Updated dependencies.
 
+## 1.0.0 (2023-02-13)
+
+
+### Features
+
+* add autoStart parameter ([0847152](https://github.com/reynirf/mobile_scanner/commit/084715237bb046170802edefce028d05d5b9fd35))
+* add hasTorch function ([4051f8d](https://github.com/reynirf/mobile_scanner/commit/4051f8dc8d13137c5fdde3ace49ee768fa840844))
+* add hasTorch notifier ([d958afa](https://github.com/reynirf/mobile_scanner/commit/d958afa493cefcbab04bd0898cc1eff067fc93fb))
+* add return image and refactor existing functions ([aa8298a](https://github.com/reynirf/mobile_scanner/commit/aa8298a78b88bfd46ebc02b5bdab680eb75a7f1a))
+* add zoomScale api for android and iOS ([a2d04e3](https://github.com/reynirf/mobile_scanner/commit/a2d04e318fe7e0bd92f98efdbf6b88ea7f396d82))
+* add zoomScale api for android and iOS ([6b0d799](https://github.com/reynirf/mobile_scanner/commit/6b0d799f7986de22896999bd6e593b57161f3080))
+* allow duplicates parameter ([d21e15d](https://github.com/reynirf/mobile_scanner/commit/d21e15d35e162092c1fb4cf15b442a4e4df7462e))
+* enable displayValue ([673d335](https://github.com/reynirf/mobile_scanner/commit/673d33569a540b604f3ff2ffbe6bdf253bac96f4))
+* update web integration ([80364d0](https://github.com/reynirf/mobile_scanner/commit/80364d055c544c507ef9e2461850f31bc258b9d4))
+* **web:** automatically inject js libraries ([0f6bc2f](https://github.com/reynirf/mobile_scanner/commit/0f6bc2fc37ac364442eea88721b4c8bac3762256))
+* **web:** pass format info to controller ([804457e](https://github.com/reynirf/mobile_scanner/commit/804457e89e880c9724bd3e6f8616ceae28722f02))
+* **web:** support formats and detectionTimeout arguments ([97213ca](https://github.com/reynirf/mobile_scanner/commit/97213cacf5ad4e06fda6499d8f01232d72ad047b))
+* **web:** torch support ([077152c](https://github.com/reynirf/mobile_scanner/commit/077152c72cdc37764b186a1529fa4d5f45ffbd5a))
+
+
+### Bug Fixes
+
+* add 'factory' keyword to support breaking change in dart 2.19 ([2491481](https://github.com/reynirf/mobile_scanner/commit/24914818853488508b86adb6cef66f24eb2bfe94))
+* bad state stream has already been listened to ([e5a2e5b](https://github.com/reynirf/mobile_scanner/commit/e5a2e5b7cff946a31764976ab8fd7f4926254778))
+* **ios:** fix initial torch state ([ccdc3c6](https://github.com/reynirf/mobile_scanner/commit/ccdc3c6208ad5346ea75fc03b3da192420dda0bb))
+* **ios:** fix torch ([ebf52fa](https://github.com/reynirf/mobile_scanner/commit/ebf52fa4c6ad9d55bd6db450c42e10a2e4a70112))
+* should check for the raw bytes instead of string, in case of a malformed utf8 string ([a563906](https://github.com/reynirf/mobile_scanner/commit/a5639060a387f9bcaa0710b0acd0e4abff36ef97))
+* use correct package name in `AndroidManifest.xml` in example ([1e85d8e](https://github.com/reynirf/mobile_scanner/commit/1e85d8ed20b4e294b4b0fe0513ed4936e79eac3f))
+* **web:** fix loading js scripts in debug mode in flutter 3.7 ([5e85a5c](https://github.com/reynirf/mobile_scanner/commit/5e85a5c1ad3949d43d80207ed8db050f0e0890e0))
+
 ## 3.0.0-beta.4
 Fixes:
 * Fixes a permission bug on Android where denying the permission would cause an infinite loop of permission requests.
